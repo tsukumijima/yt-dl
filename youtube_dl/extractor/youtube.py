@@ -1435,7 +1435,7 @@ class YoutubeIE(YoutubeBaseInfoExtractor):
             raise ExtractorError(
                 'Signature extraction failed: ' + tb, cause=e)
 
-    def _get_subtitles(self, video_id, webpage):
+    def _get_subtitles(self, video_id, webpage, has_live_chat_replay):
         try:
             subs_doc = self._download_xml(
                 'https://video.google.com/timedtext?hl=en&type=list&v=%s' % video_id,
@@ -1462,6 +1462,14 @@ class YoutubeIE(YoutubeBaseInfoExtractor):
                     'ext': ext,
                 })
             sub_lang_list[lang] = sub_formats
+        if has_live_chat_replay:
+            sub_lang_list['live_chat'] = [
+                {
+                    'video_id': video_id,
+                    'ext': 'json',
+                    'protocol': 'youtube_live_chat_replay',
+                },
+            ]
         if not sub_lang_list:
             self._downloader.report_warning('video doesn\'t have subtitles')
             return {}
@@ -1481,6 +1489,15 @@ class YoutubeIE(YoutubeBaseInfoExtractor):
         )
         config = self._search_regex(
             patterns, webpage, 'ytplayer.config', default=None)
+        if config:
+            return self._parse_json(
+                uppercase_escape(config), video_id, fatal=False)
+
+    def _get_yt_initial_data(self, video_id, webpage):
+        config = self._search_regex(
+            (r'window\["ytInitialData"\]\s*=\s*(.*?)(?<=});',
+             r'var\s+ytInitialData\s*=\s*(.*?)(?<=});'),
+            webpage, 'ytInitialData', default=None)
         if config:
             return self._parse_json(
                 uppercase_escape(config), video_id, fatal=False)
@@ -1661,21 +1678,15 @@ class YoutubeIE(YoutubeBaseInfoExtractor):
     def _extract_chapters_from_json(self, webpage, video_id, duration):
         if not webpage:
             return
-        player = self._parse_json(
+        initial_data = self._parse_json(
             self._search_regex(
-                r'RELATED_PLAYER_ARGS["\']\s*:\s*({.+})\s*,?\s*\n', webpage,
+                r'window\["ytInitialData"\] = (.+);\n', webpage,
                 'player args', default='{}'),
             video_id, fatal=False)
-        if not player or not isinstance(player, dict):
-            return
-        watch_next_response = player.get('watch_next_response')
-        if not isinstance(watch_next_response, compat_str):
-            return
-        response = self._parse_json(watch_next_response, video_id, fatal=False)
-        if not response or not isinstance(response, dict):
+        if not initial_data or not isinstance(initial_data, dict):
             return
         chapters_list = try_get(
-            response,
+            initial_data,
             lambda x: x['playerOverlays']
                        ['playerOverlayRenderer']
                        ['decoratedPlayerBarRenderer']
@@ -1825,7 +1836,7 @@ class YoutubeIE(YoutubeBaseInfoExtractor):
         # Get video info
         video_info = {}
         embed_webpage = None
-        if re.search(r'player-age-gate-content">', video_webpage) is not None:
+        if self._html_search_meta('og:restrictions:age', video_webpage, default=None) == "18+":
             age_gate = True
             # We simulate the access to the video from www.youtube.com/v/{video_id}
             # this can be viewed without login into Youtube
@@ -1983,6 +1994,15 @@ class YoutubeIE(YoutubeBaseInfoExtractor):
 
         if is_live is None:
             is_live = bool_or_none(video_details.get('isLive'))
+
+        has_live_chat_replay = False
+        if not is_live:
+            yt_initial_data = self._get_yt_initial_data(video_id, video_webpage)
+            try:
+                yt_initial_data['contents']['twoColumnWatchNextResults']['conversationBar']['liveChatRenderer']['continuations'][0]['reloadContinuationData']['continuation']
+                has_live_chat_replay = True
+            except (KeyError, IndexError, TypeError):
+                pass
 
         # Check for "rental" videos
         if 'ypc_video_rental_bar_text' in video_info and 'author' not in video_info:
@@ -2391,7 +2411,8 @@ class YoutubeIE(YoutubeBaseInfoExtractor):
             or try_get(video_info, lambda x: float_or_none(x['avg_rating'][0])))
 
         # subtitles
-        video_subtitles = self.extract_subtitles(video_id, video_webpage)
+        video_subtitles = self.extract_subtitles(
+            video_id, video_webpage, has_live_chat_replay)
         automatic_captions = self.extract_automatic_captions(video_id, video_webpage)
 
         video_duration = try_get(

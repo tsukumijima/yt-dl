@@ -293,6 +293,7 @@ from .discoverynetworks import DiscoveryNetworksDeIE
 from .discoveryvr import DiscoveryVRIE
 from .disney import DisneyIE
 from .dispeak import DigitallySpeakingIE
+from .doodstream import DoodStreamIE
 from .dropbox import DropboxIE
 from .dw import (
     DWIE,
@@ -1057,6 +1058,11 @@ from .spiegeltv import SpiegeltvIE
 from .spike import (
     BellatorIE,
     ParamountNetworkIE,
+)
+from .storyfire import (
+    StoryFireIE,
+    StoryFireUserIE,
+    StoryFireSeriesIE,
 )
 from .stitcher import StitcherIE
 from .sport5 import Sport5IE
