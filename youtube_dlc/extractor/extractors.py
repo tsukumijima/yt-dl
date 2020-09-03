@@ -273,7 +273,6 @@ from .douyutv import (
     DouyuTVIE,
 )
 from .dplay import DPlayIE
-from .dreisat import DreiSatIE
 from .drbonanza import DRBonanzaIE
 from .drtuber import DrTuberIE
 from .drtv import (
@@ -860,7 +859,10 @@ from .pluralsight import (
     PluralsightCourseIE,
 )
 from .podomatic import PodomaticIE
-from .pokemon import PokemonIE
+from .pokemon import (
+    PokemonIE,
+    PokemonWatchIE,
+)
 from .polskieradio import (
     PolskieRadioIE,
     PolskieRadioCategoryIE,
