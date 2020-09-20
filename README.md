@@ -1,3 +1,21 @@
+
+# youtube-dl (fork)
+
+## このフォークについて
+
+niconico など、だいたい Merge してくれなさそうな日本の動画配信サイトの Extractor を独自に追加・改善してるフォークです。  
+py2exe をインストールした上で、youtube-dl フォルダ内で `python setup.py py2exe` を実行すると exe 化できると思います。
+
+- [fork](https://github.com/tsukumijima/youtube-dl/tree/fork) : ここに各ブランチを Merge していく
+- [fix/niconico](https://github.com/tsukumijima/youtube-dl/tree/fix/niconico) : niconico 用 Extractor の修正用ブランチ
+  - 落ち着いたら fork にマージする
+- [fix/niconico-c](https://github.com/tsukumijima/youtube-dl/tree/fix/niconico-c) : 上記の修正を [youtube-dlc](https://github.com/blackjack4494/youtube-dlc) に PR する用ブランチ
+  - コンフリクトがめんどくさいので master-c ブランチをベースに fix/niconico での変更を cherry-pick する
+- [master](https://github.com/tsukumijima/youtube-dl/tree/master) : 本家の master ブランチを upstream から追跡する
+- [master-c](https://github.com/tsukumijima/youtube-dl/tree/master-c) : [youtube-dlc](https://github.com/blackjack4494/youtube-dlc) の master ブランチを upstream-c から追跡する
+
+------------
+
 [![Build Status](https://travis-ci.org/ytdl-org/youtube-dl.svg?branch=master)](https://travis-ci.org/ytdl-org/youtube-dl)
 
 youtube-dl - download videos from youtube.com or other video platforms
