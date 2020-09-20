@@ -36,6 +36,10 @@ from .afreecatv import AfreecaTVIE
 from .airmozilla import AirMozillaIE
 from .aljazeera import AlJazeeraIE
 from .alphaporno import AlphaPornoIE
+from .alura import (
+    AluraIE,
+    AluraCourseIE
+)
 from .amcnetworks import AMCNetworksIE
 from .americastestkitchen import AmericasTestKitchenIE
 from .animeondemand import AnimeOnDemandIE
@@ -284,6 +288,10 @@ from .drtv import (
 )
 from .dtube import DTubeIE
 from .dvtv import DVTVIE
+from .duboku import (
+    DubokuIE,
+    DubokuPlaylistIE
+)
 from .dumpert import DumpertIE
 from .defense import DefenseGouvFrIE
 from .discovery import DiscoveryIE
@@ -317,6 +325,7 @@ from .ellentube import (
     EllenTubeVideoIE,
     EllenTubePlaylistIE,
 )
+from .elonet import ElonetIE
 from .elpais import ElPaisIE
 from .embedly import EmbedlyIE
 from .engadget import EngadgetIE
@@ -589,6 +598,7 @@ from .lynda import (
     LyndaCourseIE
 )
 from .m6 import M6IE
+from .magentamusik360 import MagentaMusik360IE
 from .mailru import (
     MailRuIE,
     MailRuMusicIE,
@@ -671,6 +681,7 @@ from .myvi import (
     MyviIE,
     MyviEmbedIE,
 )
+from .myvideoge import MyVideoGeIE
 from .myvidster import MyVidsterIE
 from .nationalgeographic import (
     NationalGeographicVideoIE,
@@ -925,7 +936,9 @@ from .rbmaradio import RBMARadioIE
 from .rds import RDSIE
 from .redbulltv import (
     RedBullTVIE,
+    RedBullEmbedIE,
     RedBullTVRrnContentIE,
+    RedBullIE,
 )
 from .reddit import (
     RedditIE,
@@ -1155,10 +1168,7 @@ from .thisamericanlife import ThisAmericanLifeIE
 from .thisav import ThisAVIE
 from .thisoldhouse import ThisOldHouseIE
 from .threeqsdn import ThreeQSDNIE
-from .tiktok import (
-    TikTokIE,
-    TikTokUserIE,
-)
+from .tiktok import TikTokIE
 from .tinypic import TinyPicIE
 from .tmz import (
     TMZIE,
@@ -1242,14 +1252,11 @@ from .twentymin import TwentyMinutenIE
 from .twentythreevideo import TwentyThreeVideoIE
 from .twitcasting import TwitCastingIE
 from .twitch import (
-    TwitchVideoIE,
-    TwitchChapterIE,
     TwitchVodIE,
-    TwitchProfileIE,
-    TwitchAllVideosIE,
-    TwitchUploadsIE,
-    TwitchPastBroadcastsIE,
-    TwitchHighlightsIE,
+    TwitchCollectionIE,
+    TwitchVideosIE,
+    TwitchVideosClipsIE,
+    TwitchVideosCollectionsIE,
     TwitchStreamIE,
     TwitchClipsIE,
 )

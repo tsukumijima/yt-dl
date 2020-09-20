@@ -2,12 +2,30 @@
 [![Build Status](https://travis-ci.com/blackjack4494/youtube-dlc.svg?branch=master)](https://travis-ci.com/blackjack4494/youtube-dlc)
 [![Downloads](https://pepy.tech/badge/youtube-dlc)](https://pepy.tech/project/youtube-dlc)
 
-youtube-dlc - download videos from youtube.com or other video platforms
+[![Gitter chat](https://badges.gitter.im/youtube-dlc/gitter.png)](https://gitter.im/youtube-dlc) 
+[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](https://github.com/blackjack4494/youtube-dlc/blob/master/LICENSE)
+
+youtube-dlc - download videos from youtube.com or other video platforms.
+
+youtube-dlc is a fork of youtube-dl with the intention of getting features tested by the community merged in the tool faster, since youtube-dl's development seems to be slowing down. (https://github.com/ytdl-org/youtube-dl/issues/26462)
 
 - [INSTALLATION](#installation)
 - [DESCRIPTION](#description)
 - [OPTIONS](#options)
-- [COPYRIGHT](#copyright)
+  - [Network Options:](#network-options)
+  - [Geo Restriction:](#geo-restriction)
+  - [Video Selection:](#video-selection)
+  - [Download Options:](#download-options)
+  - [Filesystem Options:](#filesystem-options)
+  - [Thumbnail images:](#thumbnail-images)
+  - [Verbosity / Simulation Options:](#verbosity--simulation-options)
+  - [Workarounds:](#workarounds)
+  - [Video Format Options:](#video-format-options)
+  - [Subtitle Options:](#subtitle-options)
+  - [Authentication Options:](#authentication-options)
+  - [Adobe Pass Options:](#adobe-pass-options)
+  - [Post-processing Options:](#post-processing-options)
+  - [Extractor Options:](#extractor-options)
 
 # INSTALLATION
 
@@ -350,6 +368,8 @@ Then simply type this
                                      videos
     --youtube-skip-dash-manifest     Do not download the DASH manifests and
                                      related data on YouTube videos
+    --youtube-skip-hls-manifest      Do not download the HLS manifests and
+                                     related data on YouTube videos
     --merge-output-format FORMAT     If a merge is required (e.g.
                                      bestvideo+bestaudio), output to given
                                      container format. One of mkv, mp4, ogg,
@@ -400,6 +420,10 @@ Then simply type this
                                      a value between 0 (better) and 9 (worse)
                                      for VBR or a specific bitrate like 128K
                                      (default 5)
+    --remux-video FORMAT             Remux the video to another container format
+                                     if necessary (currently supported: mp4|mkv,
+                                     target container format must support video
+                                     / audio encoding, remuxing may fail)
     --recode-video FORMAT            Encode the video to another format if
                                      necessary (currently supported:
                                      mp4|flv|ogg|webm|mkv|avi)
@@ -443,4 +467,7 @@ Then simply type this
                                      push {} /sdcard/Music/ && rm {}'
     --convert-subs FORMAT            Convert the subtitles to other format
                                      (currently supported: srt|ass|vtt|lrc)
+
+## Extractor Options:
+    --ignore-dynamic-mpd             Do not process dynamic DASH manifests
 

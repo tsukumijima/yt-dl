@@ -40,6 +40,8 @@
  - **AlJazeera**
  - **Allocine**
  - **AlphaPorno**
+ - **Alura**
+ - **AluraCourse**
  - **AMCNetworks**
  - **AmericasTestKitchen**
  - **anderetijden**: npo.nl, ntr.nl, omroepwnl.nl, zapp.nl and npo3.nl
@@ -208,6 +210,7 @@
  - **daum.net:user**
  - **DBTV**
  - **DctpTv**
+ - **DeezerAlbum**
  - **DeezerPlaylist**
  - **defense.gouv.fr**
  - **democracynow**
@@ -234,6 +237,8 @@
  - **drtv**
  - **drtv:live**
  - **DTube**
+ - **duboku**: www.duboku.co
+ - **duboku:list**: www.duboku.co entire series
  - **Dumpert**
  - **dvtv**: http://video.aktualne.cz/
  - **dw**
@@ -251,6 +256,7 @@
  - **EllenTube**
  - **EllenTubePlaylist**
  - **EllenTubeVideo**
+ - **Elonet**
  - **ElPais**: El País
  - **Embedly**
  - **EMPFlix**
@@ -455,6 +461,7 @@
  - **lynda**: lynda.com videos
  - **lynda:course**: lynda.com online courses
  - **m6**
+ - **MagentaMusik360**
  - **mailru**: Видео@Mail.Ru
  - **mailru:music**: Музыка@Mail.Ru
  - **mailru:music:search**: Музыка@Mail.Ru
@@ -525,6 +532,7 @@
  - **MySpace:album**
  - **MySpass**
  - **Myvi**
+ - **MyVideoGe**
  - **MyVidster**
  - **MyviEmbed**
  - **MyVisionTV**
@@ -719,6 +727,8 @@
  - **RayWenderlichCourse**
  - **RBMARadio**
  - **RDS**: RDS.ca
+ - **RedBull**
+ - **RedBullEmbed**
  - **RedBullTV**
  - **RedBullTVRrnContent**
  - **Reddit**
@@ -900,7 +910,6 @@
  - **ThisAV**
  - **ThisOldHouse**
  - **TikTok**
- - **TikTokUser**
  - **tinypic**: tinypic.com videos
  - **TMZ**
  - **TMZArticle**
@@ -945,6 +954,7 @@
  - **TVNoe**
  - **TVNow**
  - **TVNowAnnual**
+ - **TVNowFilm**
  - **TVNowNew**
  - **TVNowSeason**
  - **TVNowShow**
@@ -955,16 +965,13 @@
  - **TVPlayHome**
  - **Tweakers**
  - **TwitCasting**
- - **twitch:chapter**
  - **twitch:clips**
- - **twitch:profile**
  - **twitch:stream**
- - **twitch:video**
- - **twitch:videos:all**
- - **twitch:videos:highlights**
- - **twitch:videos:past-broadcasts**
- - **twitch:videos:uploads**
  - **twitch:vod**
+ - **TwitchCollection**
+ - **TwitchVideos**
+ - **TwitchVideosClips**
+ - **TwitchVideosCollections**
  - **twitter**
  - **twitter:amplify**
  - **twitter:broadcast**

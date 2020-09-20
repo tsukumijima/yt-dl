@@ -209,6 +209,9 @@ def _real_main(argv=None):
         opts.audioquality = opts.audioquality.strip('k').strip('K')
         if not opts.audioquality.isdigit():
             parser.error('invalid audio quality specified')
+    if opts.remuxvideo is not None:
+        if opts.remuxvideo not in ['mp4', 'mkv']:
+            parser.error('invalid video container format specified')
     if opts.recodevideo is not None:
         if opts.recodevideo not in ['mp4', 'flv', 'webm', 'ogg', 'mkv', 'avi']:
             parser.error('invalid video recode format specified')
@@ -260,6 +263,11 @@ def _real_main(argv=None):
             'preferredcodec': opts.audioformat,
             'preferredquality': opts.audioquality,
             'nopostoverwrites': opts.nopostoverwrites,
+        })
+    if opts.remuxvideo:
+        postprocessors.append({
+            'key': 'FFmpegVideoRemuxer',
+            'preferedformat': opts.remuxvideo,
         })
     if opts.recodevideo:
         postprocessors.append({
@@ -315,6 +323,7 @@ def _real_main(argv=None):
         else match_filter_func(opts.match_filter))
 
     ydl_opts = {
+        'convertsubtitles': opts.convertsubtitles,
         'usenetrc': opts.usenetrc,
         'username': opts.username,
         'password': opts.password,
@@ -405,7 +414,9 @@ def _real_main(argv=None):
         'prefer_ffmpeg': opts.prefer_ffmpeg,
         'include_ads': opts.include_ads,
         'default_search': opts.default_search,
+        'dynamic_mpd': opts.dynamic_mpd,
         'youtube_include_dash_manifest': opts.youtube_include_dash_manifest,
+        'youtube_include_hls_manifest': opts.youtube_include_hls_manifest,
         'encoding': opts.encoding,
         'extract_flat': opts.extract_flat,
         'mark_watched': opts.mark_watched,

@@ -415,6 +415,14 @@ def parseOpts(overrideArguments=None):
         action='store_false', dest='youtube_include_dash_manifest',
         help='Do not download the DASH manifests and related data on YouTube videos')
     video_format.add_option(
+        '--youtube-include-hls-manifest',
+        action='store_true', dest='youtube_include_hls_manifest', default=True,
+        help=optparse.SUPPRESS_HELP)
+    video_format.add_option(
+        '--youtube-skip-hls-manifest',
+        action='store_false', dest='youtube_include_hls_manifest',
+        help='Do not download the HLS manifests and related data on YouTube videos')
+    video_format.add_option(
         '--merge-output-format',
         action='store', dest='merge_output_format', metavar='FORMAT', default=None,
         help=(
@@ -791,6 +799,10 @@ def parseOpts(overrideArguments=None):
         dest='audioquality', default='5',
         help='Specify ffmpeg/avconv audio quality, insert a value between 0 (better) and 9 (worse) for VBR or a specific bitrate like 128K (default %default)')
     postproc.add_option(
+        '--remux-video',
+        metavar='FORMAT', dest='remuxvideo', default=None,
+        help='Remux the video to another container format if necessary (currently supported: mp4|mkv, target container format must support video / audio encoding, remuxing may fail)')
+    postproc.add_option(
         '--recode-video',
         metavar='FORMAT', dest='recodevideo', default=None,
         help='Encode the video to another format if necessary (currently supported: mp4|flv|ogg|webm|mkv|avi)')
@@ -859,6 +871,16 @@ def parseOpts(overrideArguments=None):
         metavar='FORMAT', dest='convertsubtitles', default=None,
         help='Convert the subtitles to other format (currently supported: srt|ass|vtt|lrc)')
 
+    extractor = optparse.OptionGroup(parser, 'Extractor Options')
+    extractor.add_option(
+        '--allow-dynamic-mpd',
+        action='store_true', dest='dynamic_mpd', default=True,
+        help=optparse.SUPPRESS_HELP)
+    extractor.add_option(
+        '--ignore-dynamic-mpd',
+        action='store_false', dest='dynamic_mpd',
+        help='Do not process dynamic DASH manifests')
+
     parser.add_option_group(general)
     parser.add_option_group(network)
     parser.add_option_group(geo)
@@ -873,6 +895,7 @@ def parseOpts(overrideArguments=None):
     parser.add_option_group(authentication)
     parser.add_option_group(adobe_pass)
     parser.add_option_group(postproc)
+    parser.add_option_group(extractor)
 
     if overrideArguments is not None:
         opts, args = parser.parse_args(overrideArguments)

@@ -349,6 +349,27 @@ class FFmpegExtractAudioPP(FFmpegPostProcessor):
         return [path], information
 
 
+class FFmpegVideoRemuxerPP(FFmpegPostProcessor):
+    def __init__(self, downloader=None, preferedformat=None):
+        super(FFmpegVideoRemuxerPP, self).__init__(downloader)
+        self._preferedformat = preferedformat
+
+    def run(self, information):
+        path = information['filepath']
+        if information['ext'] == self._preferedformat:
+            self._downloader.to_screen('[ffmpeg] Not remuxing video file %s - already is in target format %s' % (path, self._preferedformat))
+            return [], information
+        options = ['-c', 'copy']
+        prefix, sep, ext = path.rpartition('.')
+        outpath = prefix + sep + self._preferedformat
+        self._downloader.to_screen('[' + 'ffmpeg' + '] Remuxing video from %s to %s, Destination: ' % (information['ext'], self._preferedformat) + outpath)
+        self.run_ffmpeg(path, outpath, options)
+        information['filepath'] = outpath
+        information['format'] = self._preferedformat
+        information['ext'] = self._preferedformat
+        return [path], information
+
+
 class FFmpegVideoConvertorPP(FFmpegPostProcessor):
     def __init__(self, downloader=None, preferedformat=None):
         super(FFmpegVideoConvertorPP, self).__init__(downloader)
@@ -476,7 +497,7 @@ class FFmpegMetadataPP(FFmpegPostProcessor):
         filename = info['filepath']
         temp_filename = prepend_extension(filename, 'temp')
         in_filenames = [filename]
-        options = []
+        options = ['-map', '0']
 
         if info['ext'] == 'm4a':
             options.extend(['-vn', '-acodec', 'copy'])
@@ -518,7 +539,12 @@ class FFmpegMergerPP(FFmpegPostProcessor):
     def run(self, info):
         filename = info['filepath']
         temp_filename = prepend_extension(filename, 'temp')
-        args = ['-c', 'copy', '-map', '0:v:0', '-map', '1:a:0']
+        args = ['-c', 'copy']
+        for (i, fmt) in enumerate(info['requested_formats']):
+            if fmt.get('acodec') != 'none':
+                args.extend(['-map', '%u:a:0' % (i)])
+            if fmt.get('vcodec') != 'none':
+                args.extend(['-map', '%u:v:0' % (i)])
         self._downloader.to_screen('[ffmpeg] Merging formats into "%s"' % filename)
         self.run_ffmpeg_multiple_files(info['__files_to_merge'], temp_filename, args)
         os.rename(encodeFilename(temp_filename), encodeFilename(filename))
