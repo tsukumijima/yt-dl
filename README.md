@@ -4,7 +4,8 @@
 ## このフォークについて
 
 niconico など、だいたい Merge してくれなさそうな日本の動画配信サイトの Extractor を独自に追加・改善してるフォークです。  
-py2exe をインストールした上で、youtube-dl フォルダ内で `python setup.py py2exe` を実行すると exe 化できると思います。
+py2exe をインストールした上で、youtube-dl フォルダ内で `python setup.py py2exe` を実行すると exe 化できます。  
+exe 化したアーカイブのダウンロードは [こちら](https://github.com/tsukumijima/youtube-dl/releases) からどうぞ。
 
 - [fork](https://github.com/tsukumijima/youtube-dl/tree/fork) : ここに各ブランチを Merge していく
 - [fix/niconico](https://github.com/tsukumijima/youtube-dl/tree/fix/niconico) : niconico 用 Extractor の修正用ブランチ
