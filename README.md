@@ -1,8 +1,8 @@
-[![PyPi](https://img.shields.io/pypi/v/youtube-dlc.svg)](https://pypi.org/project/youtube-dlc)
 [![Build Status](https://travis-ci.com/blackjack4494/youtube-dlc.svg?branch=master)](https://travis-ci.com/blackjack4494/youtube-dlc)
+[![PyPi](https://img.shields.io/pypi/v/youtube-dlc.svg)](https://pypi.org/project/youtube-dlc)
 [![Downloads](https://pepy.tech/badge/youtube-dlc)](https://pepy.tech/project/youtube-dlc)
 
-[![Gitter chat](https://badges.gitter.im/youtube-dlc/gitter.png)](https://gitter.im/youtube-dlc) 
+[![Gitter chat](https://img.shields.io/gitter/room/youtube-dlc/community)](https://gitter.im/youtube-dlc) 
 [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](https://github.com/blackjack4494/youtube-dlc/blob/master/LICENSE)
 
 youtube-dlc - download videos from youtube.com or other video platforms.
@@ -298,6 +298,8 @@ Then simply type this
                                      may change.
     --no-cache-dir                   Disable filesystem caching
     --rm-cache-dir                   Delete all filesystem cache files
+    --trim-file-name                 Limit the filename length (extension
+                                     excluded)
 
 ## Thumbnail images:
     --write-thumbnail                Write thumbnail image to disk
@@ -368,6 +370,8 @@ Then simply type this
                                      before each download (maximum possible
                                      number of seconds to sleep). Must only be
                                      used along with --min-sleep-interval.
+    --sleep-subtitles                Enforce sleep interval on subtitles as well.
+
 
 ## Video Format Options:
     -f, --format FORMAT              Video format code, see the "FORMAT
