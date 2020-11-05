@@ -330,7 +330,7 @@ class FileDownloader(object):
         """Report it was impossible to resume download."""
         self.to_screen('[download] Unable to resume')
 
-    def download(self, filename, info_dict):
+    def download(self, filename, info_dict, subtitle=False):
         """Download to a filename using the info from info_dict
         Return True on success and False otherwise
         """
@@ -357,15 +357,23 @@ class FileDownloader(object):
                 })
                 return True
 
-        min_sleep_interval = self.params.get('sleep_interval')
-        if min_sleep_interval:
-            max_sleep_interval = self.params.get('max_sleep_interval', min_sleep_interval)
-            sleep_interval = random.uniform(min_sleep_interval, max_sleep_interval)
-            self.to_screen(
-                '[download] Sleeping %s seconds...' % (
-                    int(sleep_interval) if sleep_interval.is_integer()
-                    else '%.2f' % sleep_interval))
-            time.sleep(sleep_interval)
+        if subtitle is False:
+            min_sleep_interval = self.params.get('sleep_interval')
+            if min_sleep_interval:
+                max_sleep_interval = self.params.get('max_sleep_interval', min_sleep_interval)
+                sleep_interval = random.uniform(min_sleep_interval, max_sleep_interval)
+                self.to_screen(
+                    '[download] Sleeping %s seconds...' % (
+                        int(sleep_interval) if sleep_interval.is_integer()
+                        else '%.2f' % sleep_interval))
+                time.sleep(sleep_interval)
+        else:
+            if self.params.get('sleep_interval_subtitles') > 0:
+                sleep_interval_sub = self.params.get('sleep_interval_subtitles')
+                self.to_screen(
+                    '[download] Sleeping %s seconds...' % (
+                        sleep_interval_sub))
+                time.sleep(sleep_interval_sub)
 
         timer = [None]
         heartbeat_lock = None
