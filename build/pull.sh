@@ -9,7 +9,7 @@ git pull --ff upstream-c master
 
 # fork
 git checkout fork
-git pull --ff upstream master
+git pull --ff --tags upstream master
 
 # feature/tver
 git checkout feature/tver
@@ -23,8 +23,9 @@ git pull --ff upstream master
 git checkout fix/niconico-c
 git pull --ff upstream-c master
 
-# 全てのローカルブランチを push
+# Push all local branches
 git push origin --all
 
-# ブランチを fork に戻しておく
+# Bring the branch back to the fork
 git checkout fork
+git push origin --tags
