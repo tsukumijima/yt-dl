@@ -1,6 +1,8 @@
 
 # youtube-dl (fork)
 
+### このリポジトリは元のリポジトリの凍結が解除されたため、アーカイブされました。<br>今後の開発は [tsukumijima/youtube-dl](https://github.com/tsukumijima/youtube-dl) にて行います。
+
 ## このフォークについて
 
 niconico など、だいたい Merge してくれなさそうな日本の動画配信サイトの Extractor を独自に追加・改善してるフォークです。  
